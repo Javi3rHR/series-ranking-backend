@@ -1,0 +1,12 @@
+@startuml
+left to right direction
+actor User
+
+rectangle "TV Series Ranking System" {
+    User --> (View Ratings List)
+    User --> (Add New Series)
+    User --> (Add Personal Rating)
+    User --> (View Top Series Ranking)
+}
+
+@enduml

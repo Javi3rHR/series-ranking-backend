@@ -1,0 +1,222 @@
+@startuml
+
+package "User Module" {
+    package "Entities" {
+        class User {
+            +Long id <<PK>>
+            -String name
+            -String password
+            -String email
+        }
+    }
+
+    package "DTO" {
+        class UserDTO {
+            +Long id
+            -String name
+            -String email
+        }
+
+        class LoginResponseDTO {
+            +String token
+            -UserDTO user
+        }
+    }
+
+    package "Repositories" {
+        interface UserRepository {
+            +User findById(Long id)
+            +List<User> findAll()
+            +User save(User user)
+            +void deleteById(Long id)
+        }
+    }
+
+    package "Services" {
+        interface UserService {
+            +UserDTO getUser(Long id)
+            +List<UserDTO> getAllUsers()
+            +UserDTO saveUser(UserDTO userDTO)
+            +UserDTO updateUser(Long id, UserDTO userDTO)
+            +void deleteUser(Long id)
+        }
+
+        class UserServiceImpl {
+            +UserDTO getUser(Long id)
+            +List<UserDTO> getAllUsers()
+            +UserDTO saveUser(UserDTO userDTO)
+            +UserDTO updateUser(Long id, UserDTO userDTO)
+            +void deleteUser(Long id)
+        }
+    }
+
+    package "Controllers" {
+        class UserController {
+            +ResponseEntity<UserDTO> getUser(Long id)
+            +ResponseEntity<List<UserDTO>> getAllUsers()
+            +ResponseEntity<UserDTO> saveUser(UserDTO userDTO)
+            +ResponseEntity<UserDTO> updateUser(Long id, UserDTO userDTO)
+            +ResponseEntity<Void> deleteUser(Long id)
+        }
+    }
+
+    package "Exceptions" {
+        class UserNotFoundException {
+            +UserNotFoundException(String message)
+        }
+
+        class UserAlreadyExistsException {
+            +UserAlreadyExistsException(String message)
+        }
+
+        class UserValidationException {
+            +UserValidationException(String message)
+        }
+    }
+}
+
+package "Serie Module" {
+    package "Entities" {
+        class Serie {
+            +Long id <<PK>>
+            -String name
+            -String platform
+            -String synopsis
+            -String cover
+        }
+
+        class Rating {
+            +Long id <<PK>>
+            -Double rating
+            -Long serieId <<FK>>
+            -Long userId <<FK>>
+        }
+    }
+
+    package "DTO" {
+        class SerieDTO {
+            +Long id
+            -String name
+            -String platform
+            -String synopsis
+            -String cover
+        }
+
+        class RatingDTO {
+            +Long id
+            -Double rating
+            -Long serieId
+            -Long userId
+        }
+    }
+
+    package "Repositories" {
+        interface SerieRepository {
+            +Serie findById(Long id)
+            +List<Serie> findAll()
+            +Serie save(Serie serie)
+            +void deleteById(Long id)
+        }
+
+        interface RatingRepository {
+            +Rating findById(Long id)
+            +List<Rating> findAll()
+            +Rating save(Rating rating)
+        }
+    }
+
+    package "Services" {
+        interface SerieService {
+            +SerieDTO getSerie(Long id)
+            +List<SerieDTO> getAllSeries()
+            +SerieDTO saveSerie(SerieDTO serieDTO)
+            +SerieDTO updateSerie(Long id, SerieDTO serieDTO)
+            +void deleteSerie(Long id)
+        }
+
+        class SerieServiceImpl {
+            +SerieDTO getSerie(Long id)
+            +List<SerieDTO> getAllSeries()
+            +SerieDTO saveSerie(SerieDTO serieDTO)
+            +SerieDTO updateSerie(Long id, SerieDTO serieDTO)
+            +void deleteSerie(Long id)
+        }
+
+        interface RatingService {
+            +RatingDTO getRating(Long id)
+            +List<RatingDTO> getAllRatings()
+            +RatingDTO saveRating(RatingDTO ratingDTO)
+        }
+
+        class RatingServiceImpl {
+            +RatingDTO getRating(Long id)
+            +List<RatingDTO> getAllRatings()
+            +RatingDTO saveRating(RatingDTO ratingDTO)
+        }
+    }
+
+    package "Controllers" {
+        class SerieController {
+            +ResponseEntity<SerieDTO> getSerie(Long id)
+            +ResponseEntity<List<SerieDTO>> getAllSeries()
+            +ResponseEntity<SerieDTO> saveSerie(SerieDTO serieDTO)
+            +ResponseEntity<SerieDTO> updateSerie(Long id, SerieDTO serieDTO)
+            +ResponseEntity<Void> deleteSerie(Long id)
+        }
+
+        class RatingController {
+            +ResponseEntity<RatingDTO> getRating(Long id)
+            +ResponseEntity<List<RatingDTO>> getAllRatings()
+            +ResponseEntity<RatingDTO> saveRating(RatingDTO ratingDTO)
+        }
+    }
+
+    package "Exceptions" {
+        class SerieNotFoundException {
+            +SerieNotFoundException(String message)
+        }
+
+        class RatingNotFoundException {
+            +RatingNotFoundException(String message)
+        }
+
+        class SerieValidationException {
+            +SerieValidationException(String message)
+        }
+
+        class RatingValidationException {
+            +RatingValidationException(String message)
+        }
+    }
+}
+
+package "Security" {
+    class JWTUtil {
+        +String generateToken(User user)
+        +Boolean validateToken(String token, User user)
+    }
+
+    class JWTFilter {
+        +doFilter(...)
+    }
+}
+
+' Relationships
+User "1" -- "0..*" Rating : "makes"
+Serie "1" -- "0..*" Rating : "has"
+UserRepository ..> User
+SerieRepository ..> Serie
+RatingRepository ..> Rating
+UserService ..> UserRepository
+UserServiceImpl ..|> UserService
+SerieService ..> SerieRepository
+SerieServiceImpl ..|> SerieService
+RatingService ..> RatingRepository
+RatingServiceImpl ..|> RatingService
+UserController ..> UserService
+SerieController ..> SerieService
+RatingController ..> RatingService
+JWTUtil ..> User
+JWTFilter ..> JWTUtil
+
+@enduml

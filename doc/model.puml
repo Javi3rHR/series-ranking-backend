@@ -1,0 +1,40 @@
+@startuml
+
+class Series {
+    - Long id
+    - String name
+    - String platform
+    - String synopsis
+    - String cover
+    - List<Rating> ratings
+    + calculateAverageRating(): Double
+}
+
+class Rating {
+    - Long id
+    - User user
+    - Series series
+    - Double rating
+}
+
+class User {
+    - Long id
+    - String name
+    + addRating(series: Series, rating: Double): void
+}
+
+class Ranking {
+    - List<Series> series
+    + calculateRanking(): List<Series>
+}
+
+' Composition relationship between Series and Rating
+Series "1" *-- "0..*" Rating : has >
+
+' Association relationship between User and Rating
+User "1" --> "0..*" Rating : makes >
+
+' Association relationship between Ranking and Series
+Ranking "1" --> "0..*" Series : includes >
+
+@enduml
