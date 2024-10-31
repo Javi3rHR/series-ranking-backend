@@ -1,7 +1,5 @@
 package com.example.series_ranking.user.service;
 
-import com.example.series_ranking.user.User;
-import com.example.series_ranking.user.dto.LoginUser;
 import com.example.series_ranking.user.dto.UserDTO;
 
 import java.util.List;

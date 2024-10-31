@@ -4,7 +4,6 @@ import com.example.series_ranking.user.User;
 import com.example.series_ranking.user.UserRepository;
 import com.example.series_ranking.user.dto.UserDTO;
 import com.example.series_ranking.user.exception.UserAlreadyExistsException;
-import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;

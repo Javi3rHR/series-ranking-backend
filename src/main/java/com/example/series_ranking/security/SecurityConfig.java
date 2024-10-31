@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -19,7 +20,7 @@ public class SecurityConfig {
                         .anyRequest().permitAll() // Allow access to all endpoints
                 )
                 .httpBasic(Customizer.withDefaults())
-                .csrf(csrf -> csrf.disable()); // Disable CSRF for simplicity in testing
+                .csrf(AbstractHttpConfigurer::disable); // Disable CSRF for simplicity in testing
         return http.build();
     }
 
