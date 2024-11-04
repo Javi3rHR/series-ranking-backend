@@ -58,29 +58,6 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-//
-//    @Override
-//    public UserDTO update(Long id, @Valid User user) {
-//        return userRepository.findById(id)
-//                .map(existingUser -> {
-//                    existingUser.setEmail(user.getEmail());
-//                    existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
-//                    existingUser.setUsername(user.getUsername());
-//                    return userRepository.save(existingUser);
-//                })
-//                .orElseThrow(() -> new UserNotFoundException(id));
-//    }
-//
-//    @Override
-//    public boolean delete(Long id) {
-//        if (userRepository.existsById(id)) {
-//            userRepository.deleteById(id);
-//            return true;
-//        } else {
-//            throw new UserNotFoundException(id);
-//        }
-//    }
-
     private UserDTO convertToDto(User user) {
         return modelMapper.map(user, UserDTO.class);
     }

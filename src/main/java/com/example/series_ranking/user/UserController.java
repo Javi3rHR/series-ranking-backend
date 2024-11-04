@@ -39,21 +39,4 @@ public class UserController {
         UserDTO createdUser = userService.save(userDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
-//
-//    @PutMapping("/{id}")
-//    public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserDTO userDTO) {
-//        return userService.update(id, userDTO.getUserFromDto())
-//                .map(this::convertToDTO)
-//                .map(ResponseEntity::ok)
-//                .orElseThrow(() -> new UserNotFoundException(id));
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> delete(@PathVariable Long id) {
-//        if (userService.delete(id)) {
-//            return ResponseEntity.noContent().build();
-//        } else {
-//            throw new UserNotFoundException(id);
-//        }
-//    }
 }
