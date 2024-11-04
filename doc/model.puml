@@ -7,7 +7,6 @@ class Series {
     - String synopsis
     - String cover
     - List<Rating> ratings
-    + calculateAverageRating(): Double
 }
 
 class Rating {
@@ -20,12 +19,10 @@ class Rating {
 class User {
     - Long id
     - String name
-    + addRating(series: Series, rating: Double): void
 }
 
 class Ranking {
     - List<Series> series
-    + calculateRanking(): List<Series>
 }
 
 ' Composition relationship between Series and Rating
