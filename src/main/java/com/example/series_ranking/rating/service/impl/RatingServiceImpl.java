@@ -101,9 +101,11 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public void delete(RatingIdDTO id) {
-        Rating rating = ratingRepository.findById(convertToRatingIdEntity(id))
-                .orElseThrow(() -> new RatingNotFoundException(id));
-        ratingRepository.delete(rating);
+        if (!ratingRepository.existsById(convertToRatingIdEntity(id))) {
+            throw new RatingNotFoundException(id);
+        }
+
+        ratingRepository.deleteById(convertToRatingIdEntity(id));
     }
 
     private RatingDTO convertToDto(Rating rating) {

@@ -2,12 +2,14 @@ package com.example.series_ranking.rating.entity;
 
 import com.example.series_ranking.user.User;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "rating")
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class Rating {
 
