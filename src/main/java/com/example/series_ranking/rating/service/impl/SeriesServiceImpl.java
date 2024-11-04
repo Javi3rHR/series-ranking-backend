@@ -6,7 +6,6 @@ import com.example.series_ranking.rating.dto.SeriesResponseDTO;
 import com.example.series_ranking.rating.entity.Series;
 import com.example.series_ranking.rating.exception.SeriesAlreadyExistsException;
 import com.example.series_ranking.rating.exception.SeriesNotFoundException;
-import com.example.series_ranking.rating.repository.RatingRepository;
 import com.example.series_ranking.rating.repository.SeriesRepository;
 import com.example.series_ranking.rating.service.SeriesService;
 import org.modelmapper.ModelMapper;
@@ -23,9 +22,6 @@ public class SeriesServiceImpl implements SeriesService {
 
     @Autowired
     private SeriesRepository seriesRepository;
-
-    @Autowired
-    private RatingRepository ratingRepository;
 
     @Autowired
     private ModelMapper modelMapper;
