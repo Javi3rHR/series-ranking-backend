@@ -1,6 +1,7 @@
 package com.example.series_ranking.rating.controller;
 
 import com.example.series_ranking.rating.dto.SeriesDTO;
+import com.example.series_ranking.rating.dto.SeriesResponseDTO;
 import com.example.series_ranking.rating.service.SeriesService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +20,14 @@ public class SeriesController {
     private SeriesService seriesService;
 
     @GetMapping
-    public ResponseEntity<List<SeriesDTO>> findAll() {
-        List<SeriesDTO> seriesList = seriesService.findAll();
+    public ResponseEntity<List<SeriesResponseDTO>> findAll() {
+        List<SeriesResponseDTO> seriesList = seriesService.findAll();
         return new ResponseEntity<>(seriesList, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SeriesDTO> findById(@PathVariable Long id) {
-        Optional<SeriesDTO> seriesDTO = seriesService.findById(id);
+    public ResponseEntity<SeriesResponseDTO> findById(@PathVariable Long id) {
+        Optional<SeriesResponseDTO> seriesDTO = seriesService.findById(id);
         return seriesDTO.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }

@@ -1,6 +1,8 @@
 package com.example.series_ranking.rating.controller;
 
 import com.example.series_ranking.rating.dto.RatingDTO;
+import com.example.series_ranking.rating.dto.RatingIdDTO;
+import com.example.series_ranking.rating.dto.TopRatedSeriesResponseDTO;
 import com.example.series_ranking.rating.service.RatingService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +26,18 @@ public class RatingController {
         return new ResponseEntity<>(ratings, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<RatingDTO> findById(@PathVariable Long id) {
-        Optional<RatingDTO> ratingDTO = ratingService.findById(id);
+    @GetMapping("/top-rated")
+    public ResponseEntity<List<TopRatedSeriesResponseDTO>> getTopRatedSeries() {
+        Optional<List<TopRatedSeriesResponseDTO>> topRatedSeries = ratingService.findTopRatedSeries();
+        return topRatedSeries.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/series/{seriesId}/user/{userId}")
+    public ResponseEntity<RatingDTO> findById(@PathVariable Long seriesId, @PathVariable Long userId) {
+        Optional<RatingDTO> ratingDTO = ratingService.findById(new RatingIdDTO(seriesId, userId));
         return ratingDTO.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -37,15 +46,15 @@ public class RatingController {
         return new ResponseEntity<>(savedRating, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<RatingDTO> update(@Valid @PathVariable Long id, @RequestBody RatingDTO ratingDTO) {
-        RatingDTO updatedRating = ratingService.update(id, ratingDTO);
+    @PutMapping
+    public ResponseEntity<RatingDTO> update(@Valid @RequestBody RatingDTO ratingDTO) {
+        RatingDTO updatedRating = ratingService.update(ratingDTO);
         return new ResponseEntity<>(updatedRating, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        ratingService.delete(id);
+    @DeleteMapping("/series/{seriesId}/user/{userId}")
+    public ResponseEntity<Void> delete(@PathVariable Long seriesId, @PathVariable Long userId) {
+        ratingService.delete(new RatingIdDTO(seriesId, userId));
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

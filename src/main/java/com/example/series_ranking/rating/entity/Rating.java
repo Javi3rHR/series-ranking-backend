@@ -11,18 +11,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Rating {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @EmbeddedId
+    private RatingId id;
 
     @Column(nullable = false)
     private Double rating;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("seriesId")
     @JoinColumn(name = "series_id", nullable = false)
     private Series series;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("userId")
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }

@@ -2,14 +2,15 @@ package com.example.series_ranking.rating.service;
 
 
 import com.example.series_ranking.rating.dto.SeriesDTO;
+import com.example.series_ranking.rating.dto.SeriesResponseDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface SeriesService {
-    List<SeriesDTO> findAll();
+    List<SeriesResponseDTO> findAll();
 
-    Optional<SeriesDTO> findById(Long id);
+    Optional<SeriesResponseDTO> findById(Long id);
 
     SeriesDTO save(SeriesDTO seriesDTO);
 

@@ -1,7 +1,9 @@
 package com.example.series_ranking.rating.exception;
 
+import com.example.series_ranking.rating.dto.RatingIdDTO;
+
 public class RatingAlreadyExistsException extends RuntimeException {
-    public RatingAlreadyExistsException(Long userId, Long seriesId) {
-        super("Rating for user with ID " + userId + " and series with ID " + seriesId + " already exists.");
+    public RatingAlreadyExistsException(RatingIdDTO id) {
+        super("Rating for user with ID " + id.getUserId() + " and series with ID " + id.getSeriesId() + " already exists.");
     }
 }
