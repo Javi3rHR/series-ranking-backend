@@ -2,6 +2,7 @@ package com.example.series_ranking.rating.controller;
 
 import com.example.series_ranking.rating.dto.RatingDTO;
 import com.example.series_ranking.rating.service.RatingService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,13 +32,13 @@ public class RatingController {
     }
 
     @PostMapping
-    public ResponseEntity<RatingDTO> save(@RequestBody RatingDTO ratingDTO) {
+    public ResponseEntity<RatingDTO> save(@Valid @RequestBody RatingDTO ratingDTO) {
         RatingDTO savedRating = ratingService.save(ratingDTO);
         return new ResponseEntity<>(savedRating, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RatingDTO> update(@PathVariable Long id, @RequestBody RatingDTO ratingDTO) {
+    public ResponseEntity<RatingDTO> update(@Valid @PathVariable Long id, @RequestBody RatingDTO ratingDTO) {
         RatingDTO updatedRating = ratingService.update(id, ratingDTO);
         return new ResponseEntity<>(updatedRating, HttpStatus.OK);
     }
