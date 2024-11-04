@@ -20,6 +20,4 @@ public interface RatingRepository extends JpaRepository<Rating, RatingId> {
             "ORDER BY AVG(r.rating) DESC")
     Optional<List<TopRatedSeriesResponseDTO>> findTopRatedSeries();
 
-    List<Rating> findAllBySeriesId(Long seriesId);
-
 }
