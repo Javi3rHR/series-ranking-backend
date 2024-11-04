@@ -23,6 +23,17 @@ Ejecuta los siguientes comandos para construir y ejecutar la imagen Docker:
 
 ```bash
 docker build -t series-ranking
+```
+```bash
 docker run -d -p 8081:8081 --name series-ranking series-ranking
 ```
+
+## Requisitos funcionales (Casos de uso)
+![image](https://github.com/user-attachments/assets/56cc21fc-08d7-4f78-93a3-e7956aed29a9)
+
+## Modelado de datos
+![image](https://github.com/user-attachments/assets/31558077-2db0-4f2d-9629-0c050e98188e)
+
+## Arquitectura de la Aplicación
+![image](https://github.com/user-attachments/assets/e2cfcb16-bc95-4e73-bb43-3e10aa73fd09)
 
