@@ -25,10 +25,11 @@ package "User Module" {
 
     package "Repositories" {
         interface UserRepository {
-            +User findById(Long id)
+            +Optional<User> findById(Long id)
             +List<User> findAll()
             +User save(User user)
             +void deleteById(Long id)
+            +boolean existsById(Long id)
         }
     }
 
@@ -62,11 +63,11 @@ package "User Module" {
 
     package "Exceptions" {
         class UserNotFoundException {
-            +UserNotFoundException(String message)
+            +UserNotFoundException(Long id)
         }
 
         class UserAlreadyExistsException {
-            +UserAlreadyExistsException(String message)
+            +UserAlreadyExistsException(String username, String email)
         }
 
         class UserValidationException {
@@ -77,7 +78,7 @@ package "User Module" {
 
 package "Serie Module" {
     package "Entities" {
-        class Serie {
+        class Series {
             +Long id <<PK>>
             -String name
             -String platform
@@ -88,13 +89,13 @@ package "Serie Module" {
         class Rating {
             +Long id <<PK>>
             -Double rating
-            -Long serieId <<FK>>
+            -Long seriesId <<FK>>
             -Long userId <<FK>>
         }
     }
 
     package "DTO" {
-        class SerieDTO {
+        class SeriesDTO {
             +Long id
             -String name
             -String platform
@@ -105,83 +106,91 @@ package "Serie Module" {
         class RatingDTO {
             +Long id
             -Double rating
-            -Long serieId
+            -Long seriesId
             -Long userId
         }
     }
 
     package "Repositories" {
-        interface SerieRepository {
-            +Serie findById(Long id)
-            +List<Serie> findAll()
-            +Serie save(Serie serie)
+        interface SeriesRepository {
+            +Optional<Series> findById(Long id)
+            +List<Series> findAll()
+            +Series save(Series series)
             +void deleteById(Long id)
+            +boolean existsById(Long id)
         }
 
         interface RatingRepository {
-            +Rating findById(Long id)
+            +Optional<Rating> findById(Long id)
             +List<Rating> findAll()
             +Rating save(Rating rating)
+            +boolean existsByUserIdAndSeriesId(Long userId, Long seriesId)
         }
     }
 
     package "Services" {
-        interface SerieService {
-            +SerieDTO getSerie(Long id)
-            +List<SerieDTO> getAllSeries()
-            +SerieDTO saveSerie(SerieDTO serieDTO)
-            +SerieDTO updateSerie(Long id, SerieDTO serieDTO)
-            +void deleteSerie(Long id)
+        interface SeriesService {
+            +SeriesDTO getSeries(Long id)
+            +List<SeriesDTO> getAllSeries()
+            +SeriesDTO saveSeries(SeriesDTO seriesDTO)
+            +SeriesDTO updateSeries(Long id, SeriesDTO seriesDTO)
+            +void deleteSeries(Long id)
         }
 
-        class SerieServiceImpl {
-            +SerieDTO getSerie(Long id)
-            +List<SerieDTO> getAllSeries()
-            +SerieDTO saveSerie(SerieDTO serieDTO)
-            +SerieDTO updateSerie(Long id, SerieDTO serieDTO)
-            +void deleteSerie(Long id)
+        class SeriesServiceImpl {
+            +SeriesDTO getSeries(Long id)
+            +List<SeriesDTO> getAllSeries()
+            +SeriesDTO saveSeries(SeriesDTO seriesDTO)
+            +SeriesDTO updateSeries(Long id, SeriesDTO seriesDTO)
+            +void deleteSeries(Long id)
         }
 
         interface RatingService {
             +RatingDTO getRating(Long id)
             +List<RatingDTO> getAllRatings()
             +RatingDTO saveRating(RatingDTO ratingDTO)
+            +RatingDTO updateRating(Long id, RatingDTO ratingDTO)
+            +void deleteRating(Long id)
         }
 
         class RatingServiceImpl {
             +RatingDTO getRating(Long id)
             +List<RatingDTO> getAllRatings()
             +RatingDTO saveRating(RatingDTO ratingDTO)
+            +RatingDTO updateRating(Long id, RatingDTO ratingDTO)
+            +void deleteRating(Long id)
         }
     }
 
     package "Controllers" {
-        class SerieController {
-            +ResponseEntity<SerieDTO> getSerie(Long id)
-            +ResponseEntity<List<SerieDTO>> getAllSeries()
-            +ResponseEntity<SerieDTO> saveSerie(SerieDTO serieDTO)
-            +ResponseEntity<SerieDTO> updateSerie(Long id, SerieDTO serieDTO)
-            +ResponseEntity<Void> deleteSerie(Long id)
+        class SeriesController {
+            +ResponseEntity<SeriesDTO> getSeries(Long id)
+            +ResponseEntity<List<SeriesDTO>> getAllSeries()
+            +ResponseEntity<SeriesDTO> saveSeries(SeriesDTO seriesDTO)
+            +ResponseEntity<SeriesDTO> updateSeries(Long id, SeriesDTO seriesDTO)
+            +ResponseEntity<Void> deleteSeries(Long id)
         }
 
         class RatingController {
             +ResponseEntity<RatingDTO> getRating(Long id)
             +ResponseEntity<List<RatingDTO>> getAllRatings()
             +ResponseEntity<RatingDTO> saveRating(RatingDTO ratingDTO)
+            +ResponseEntity<RatingDTO> updateRating(Long id, RatingDTO ratingDTO)
+            +ResponseEntity<Void> deleteRating(Long id)
         }
     }
 
     package "Exceptions" {
-        class SerieNotFoundException {
-            +SerieNotFoundException(String message)
+        class SeriesNotFoundException {
+            +SeriesNotFoundException(Long id)
         }
 
         class RatingNotFoundException {
-            +RatingNotFoundException(String message)
+            +RatingNotFoundException(Long id)
         }
 
-        class SerieValidationException {
-            +SerieValidationException(String message)
+        class SeriesValidationException {
+            +SeriesValidationException(String message)
         }
 
         class RatingValidationException {
@@ -203,18 +212,18 @@ package "Security" {
 
 ' Relationships
 User "1" -- "0..*" Rating : "makes"
-Serie "1" -- "0..*" Rating : "has"
+Series "1" -- "0..*" Rating : "has"
 UserRepository ..> User
-SerieRepository ..> Serie
+SeriesRepository ..> Series
 RatingRepository ..> Rating
 UserService ..> UserRepository
 UserServiceImpl ..|> UserService
-SerieService ..> SerieRepository
-SerieServiceImpl ..|> SerieService
+SeriesService ..> SeriesRepository
+SeriesServiceImpl ..|> SeriesService
 RatingService ..> RatingRepository
 RatingServiceImpl ..|> RatingService
 UserController ..> UserService
-SerieController ..> SerieService
+SeriesController ..> SeriesService
 RatingController ..> RatingService
 JWTUtil ..> User
 JWTFilter ..> JWTUtil
