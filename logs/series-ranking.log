@@ -1,0 +1,24 @@
+2024-11-04T21:04:41.549+01:00  INFO 26620 --- [series-ranking] [main] c.e.s.SeriesRankingApplicationTests      : Starting SeriesRankingApplicationTests using Java 21.0.5 with PID 26620 (started by coyot in C:\dev\series-ranking)
+2024-11-04T21:04:41.551+01:00 DEBUG 26620 --- [series-ranking] [main] c.e.s.SeriesRankingApplicationTests      : Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-11-04T21:04:41.552+01:00  INFO 26620 --- [series-ranking] [main] c.e.s.SeriesRankingApplicationTests      : No active profile set, falling back to 1 default profile: "default"
+2024-11-04T21:04:42.710+01:00  INFO 26620 --- [series-ranking] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-04T21:04:42.776+01:00  INFO 26620 --- [series-ranking] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 58 ms. Found 3 JPA repository interfaces.
+2024-11-04T21:04:43.551+01:00  INFO 26620 --- [series-ranking] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-04T21:04:43.645+01:00  INFO 26620 --- [series-ranking] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-11-04T21:04:43.684+01:00  INFO 26620 --- [series-ranking] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-11-04T21:04:43.838+01:00  INFO 26620 --- [series-ranking] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-04T21:04:43.872+01:00  INFO 26620 --- [series-ranking] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-11-04T21:04:44.116+01:00  INFO 26620 --- [series-ranking] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/seriesdb user=SA
+2024-11-04T21:04:44.117+01:00  INFO 26620 --- [series-ranking] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-11-04T21:04:44.138+01:00  WARN 26620 --- [series-ranking] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-04T21:04:44.918+01:00  INFO 26620 --- [series-ranking] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-04T21:04:44.970+01:00  INFO 26620 --- [series-ranking] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04T21:04:45.357+01:00  INFO 26620 --- [series-ranking] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-04T21:04:46.132+01:00  WARN 26620 --- [series-ranking] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-04T21:04:46.220+01:00  INFO 26620 --- [series-ranking] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-11-04T21:04:46.922+01:00  INFO 26620 --- [series-ranking] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2024-11-04T21:04:47.464+01:00  INFO 26620 --- [series-ranking] [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/seriesdb'
+2024-11-04T21:04:47.570+01:00  INFO 26620 --- [series-ranking] [main] c.e.s.SeriesRankingApplicationTests      : Started SeriesRankingApplicationTests in 6.345 seconds (process running for 9.365)
+2024-11-04T21:04:47.809+01:00  INFO 26620 --- [series-ranking] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04T21:04:47.812+01:00  INFO 26620 --- [series-ranking] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-11-04T21:04:47.816+01:00  INFO 26620 --- [series-ranking] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
