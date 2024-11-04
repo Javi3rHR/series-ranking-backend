@@ -19,13 +19,10 @@ Esta es una aplicación de Spring Boot para gestionar rankings de series de tele
 
 ## Construcción de la Imagen
 
-Ejecuta el siguiente comando para construir la imagen Docker:
+Ejecuta los siguientes comandos para construir y ejecutar la imagen Docker:
 
 ```bash
-docker build -t series-ranking .
-
-
-Ejecuta el siguiente comando para correr la aplicación en un contenedor Docker:
-
-```bash
+docker build -t series-ranking
 docker run -d -p 8081:8081 --name series-ranking series-ranking
+```
+
